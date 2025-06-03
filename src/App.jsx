@@ -1,10 +1,10 @@
 import Header from "./components/sections/header";
 import WeatherBoard from "./components/sections/WeatherBoard";
-import WeatherProvider from "./provider/WeatherProvider";
+import Provider from "./provider/Provider";
 
 function App() {
   return (
-    <WeatherProvider>
+    <Provider>
       <div className="bg-gradient-to-b from-[#0F172A] to-[#1E293B] text-white min-h-screen flex flex-col">
         <Header />
 
@@ -13,8 +13,9 @@ function App() {
             <WeatherBoard />
           </section>
         </main>
+
       </div>
-    </WeatherProvider>
+    </Provider>
   );
 }
 
