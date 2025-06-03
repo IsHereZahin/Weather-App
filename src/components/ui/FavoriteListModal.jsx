@@ -1,7 +1,7 @@
 import { useContext } from 'react';
 import { FavoriteContext, LocationContext } from '../../context';
 
-export default function FavoriteListModal() {
+export default function FavoriteListModal({ offModal }) {
     const { favorites } = useContext(FavoriteContext);
     const { setSelectedLocation } = useContext(LocationContext);
 
@@ -19,7 +19,10 @@ export default function FavoriteListModal() {
                                 className="px-4 py-2">
                                 <button
                                     className="w-full text-left hover:bg-gray-800 rounded-md px-4 py-2 cursor-pointer transition-colors"
-                                    onClick={() => setSelectedLocation({ ...fav })}
+                                    onClick={() => {
+                                        setSelectedLocation({ ...fav });
+                                        offModal();
+                                    }}
                                 >
                                     {fav.location}
                                 </button>

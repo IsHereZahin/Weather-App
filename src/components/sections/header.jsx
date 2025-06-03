@@ -19,7 +19,7 @@ export default function Header() {
                 <div className="flex items-center gap-4 relative">
                     <Search />
                     <Favorite toggleModal={toggleModal} />
-                    {isOpen && <FavoriteListModal />}
+                    {isOpen && <FavoriteListModal offModal={toggleModal} />}
                 </div>
             </nav>
         </header>

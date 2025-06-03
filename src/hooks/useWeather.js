@@ -62,6 +62,7 @@ const useWeather = () => {
             setWeatherData(updatedWeather);
             setError(null);
         } catch (err) {
+            console.error(err);
             setError(err.message || "Something went wrong");
         } finally {
             setLoading({
