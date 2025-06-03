@@ -1,4 +1,5 @@
-import { useState, useEffect } from "react";
+import { useContext, useEffect, useState } from "react";
+import { LocationContext } from "../context";
 
 const useWeather = () => {
     const [weatherData, setWeatherData] = useState({
@@ -22,6 +23,9 @@ const useWeather = () => {
     });
 
     const [error, setError] = useState(null);
+    const { selectedLocation } = useContext(LocationContext);
+    // console.log(`Selected Location changed:`, selectedLocation);
+
 
     const fetchWeatherData = async (latitude, longitude) => {
         try {
@@ -68,7 +72,7 @@ const useWeather = () => {
     };
 
     useEffect(() => {
-        // 🔐 Prevent memory leak
+        // Prevent memory leak
         let ignore = false; 
 
         setLoading({
@@ -82,24 +86,30 @@ const useWeather = () => {
             return;
         }
 
-        navigator.geolocation.getCurrentPosition(
-            (position) => {
-                if (!ignore) {
-                    const { latitude, longitude } = position.coords;
-                    fetchWeatherData(latitude, longitude);
+        // If a location is selected, fetch weather data for that location
+        if(selectedLocation.latitude && selectedLocation.longitude) {
+            fetchWeatherData(selectedLocation.latitude, selectedLocation.longitude);
+            return;
+        } else {
+            navigator.geolocation.getCurrentPosition(
+                (position) => {
+                    if (!ignore) {
+                        const { latitude, longitude } = position.coords;
+                        fetchWeatherData(latitude, longitude);
+                    }
+                },
+                () => {
+                    setError("Unable to fetch location");
+                    setLoading({ state: false, message: "" });
                 }
-            },
-            () => {
-                setError("Unable to fetch location");
-                setLoading({ state: false, message: "" });
-            }
-        );
+            );
+        }
 
-        // 🔐 Cleanup
+        // Cleanup
         return () => {
             ignore = true; 
         };
-    }, []);
+    }, [selectedLocation]);
 
     return {
         weatherData,
