@@ -6,8 +6,7 @@ A modern and responsive weather application built with **React 18** and **Tailwi
 
 ## Demo
 
-You can view the live demo [here](https://your-vercel-deployment-url.vercel.app) *(replace with actual URL)*
-
+You can view the live demo [here](https://weather-app-sandy-seven.vercel.app/)
 ---
 
 ## Features
