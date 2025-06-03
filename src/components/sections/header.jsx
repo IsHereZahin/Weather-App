@@ -14,7 +14,7 @@ export default function Header() {
                 <div className="flex items-center gap-4 relative">
                     <Search />
                     <Favorite />
-                    <FavoriteListModal />
+                    {/* <FavoriteListModal /> */}
                 </div>
             </nav>
         </header>
